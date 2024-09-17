@@ -1,6 +1,7 @@
 # Define the Google Cloud Storage bucket
+# TODO: Remove the dev before going live
 resource "google_storage_bucket" "bucket" {
-  name          = "${var.env}-${var.app_name}"
+  name          = "okapi-hub-bucket"
   location      = var.region
   storage_class = "STANDARD"
   force_destroy = true

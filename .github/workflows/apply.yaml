@@ -30,15 +30,12 @@ jobs:
         run: |-
           cat > pipeline.auto.tfvars <<EOF
           app_name="${{ vars.APP_NAME }}"
-          env="${{ vars.ENV }}"
           docker_demon_host="unix:///var/run/docker.sock"
           region="${{ vars.REGION }}" 
           project_id="${{ vars.PROJECT_ID }}" 
           project_id_number="${{ vars.PROJECT_ID_NUMBER }}"
           db_name="${{ vars.DB_NAME }}"
           github_app_id="${{vars.TF_GITHUB_APP_ID}}"
-          cloud_build_file_path="${{vars.CLOUD_BUILD_FILE_PATH}}"
-          github_repository="${{vars.STARTER_APP_REPOSITORY}}"
           
 
           secrets = {

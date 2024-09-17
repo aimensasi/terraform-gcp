@@ -1,5 +1,5 @@
 resource "google_sql_database_instance" "default" {
-  name             = "${var.env}-db-instance"
+  name             = "dev-db-instance"
   database_version = "MYSQL_8_0"
   region           = var.region
   deletion_protection=false
