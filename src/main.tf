@@ -69,6 +69,6 @@ module "okapi-hub-service" {
     google_project_service.cloud_run,
     google_service_account.sa,
     google_sql_database_instance.default,
-    null_resource.push_image_to_registry
+    module.okapi-hub-registry
   ]
 }
