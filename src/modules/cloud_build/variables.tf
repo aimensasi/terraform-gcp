@@ -33,3 +33,8 @@ variable "github_access_token" {
   description = "Github Access Token"
   type = string
 }
+
+variable "service_account" {
+  description = "Service Account ID"
+  type = string
+}

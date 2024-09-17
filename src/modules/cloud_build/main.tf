@@ -22,11 +22,11 @@ resource "google_cloudbuildv2_repository" "github_repository" {
 
 resource "google_cloudbuild_trigger" "build_trigger" {
   name = "gcp-starter-build-trigger"
-  service_account = google_service_account.sa.id
+  service_account = var.service_account
   location = var.region
 
   repository_event_config {
-    repository = google_cloudbuildv2_repository.gcp_starter_repo.id
+    repository = google_cloudbuildv2_repository.github_repository.id
     push {
     #   branch = "feature-.*"
       branch = "^main$"
@@ -36,6 +36,6 @@ resource "google_cloudbuild_trigger" "build_trigger" {
   filename = var.cloud_build_file_path
 
   depends_on = [
-    google_cloudbuildv2_repository.gcp_starter_repo
+    google_cloudbuildv2_repository.github_repository
   ]
 }

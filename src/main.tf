@@ -49,6 +49,7 @@ module "okapi-hub-ci" {
   github_repository     = "https://github.com/aimensasi/okapi-hub"
   cloud_build_file_path = ".github/cloudbuild.yaml"
   github_access_token   = google_secret_manager_secret_version.secrets_versions["github_access_token"].name
+  service_account = google_service_account.sa.id
 
   depends_on = [
     google_project_service.cloud_build,
