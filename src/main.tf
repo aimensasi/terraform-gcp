@@ -48,6 +48,7 @@ module "okapi-hub-ci" {
   github_app_id         = var.github_app_id
   github_repository     = "https://github.com/aimensasi/okapi-hub"
   cloud_build_file_path = ".github/cloudbuild.yaml"
+  github_access_token   = google_secret_manager_secret_version.secrets_versions["github_access_token"].name
 
   depends_on = [
     google_project_service.cloud_build,
@@ -64,8 +65,10 @@ module "okapi-hub-service" {
   region   = var.region
   app_name = "okapi-hub"
   image    = "${var.region}-docker.pkg.dev/${var.project_id}/okapi-hub-repo/okapi-hub"
+  db_connection_id = google_sql_database_instance.default.connection_name
+  service_account = google_service_account.sa.email
 
-  depends_on = [   
+  depends_on = [
     google_project_service.cloud_run,
     google_service_account.sa,
     google_sql_database_instance.default,

@@ -19,9 +19,9 @@ resource "google_cloud_run_v2_service" "service" {
     volumes {
       name = "cloudsql"
       cloud_sql_instance {
-        instances = [google_sql_database_instance.default.connection_name]
+        instances = [var.db_connection_id]
       }
     }
-    service_account = google_service_account.sa.email
+    service_account = var.service_account
   }
 }

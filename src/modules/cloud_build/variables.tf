@@ -28,3 +28,8 @@ variable "cloud_build_file_path" {
   description = "Cloud buuild file path"
   type = string
 }
+
+variable "github_access_token" {
+  description = "Github Access Token"
+  type = string
+}
