@@ -7,6 +7,5 @@
 4. Enable `Cloud Resource Manager API` 
 5. Enable Billing Account
 4. Create Service Key and add it to github secrets
-5. Create a storage bucket and add the name to the environment variable called GOOGLE_CREDENTIALS, 
-    terraform will look for this variable for credentials
+5. Create a storage bucket to be used by terraform to store state
 6. Set Docker host variable
