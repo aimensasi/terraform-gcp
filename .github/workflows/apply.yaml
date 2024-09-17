@@ -32,7 +32,7 @@ jobs:
           cat > pipeline.auto.tfvars <<EOF
           app_name="${{ vars.APP_NAME }}"
           env="${{ vars.ENV }}"
-          docker_demon_host="tcp://localhost:2375"
+          docker_demon_host="tcp://docker:2375"
           region="${{ vars.REGION }}" 
           project_id="${{ vars.PROJECT_ID }}" 
           project_id_number="${{ vars.PROJECT_ID_NUMBER }}"
