@@ -20,9 +20,9 @@ resource "google_cloudbuildv2_connection" "github_connection" {
 
 resource "google_cloudbuildv2_repository" "gcp_starter_repo" {
   location          = var.region
-  name              = "gcp_starter"
+  name              = var.app_name
   parent_connection = google_cloudbuildv2_connection.github_connection.name
-  remote_uri        = "https://github.com/aimensasi/gcp-starter.git"
+  remote_uri        = var.github_repository
 
   depends_on = [google_cloudbuildv2_connection.github_connection]
 }

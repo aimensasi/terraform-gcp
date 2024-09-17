@@ -45,3 +45,9 @@ variable "cloud_build_file_path" {
     type = string
     default = "cloudbuild.yaml"
 }
+
+
+variable "github_repository" {
+  description = "Github Repository Name"
+  type        = string
+}

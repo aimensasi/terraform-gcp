@@ -13,18 +13,18 @@ jobs:
         shell: bash
         working-directory: ./src
 
-    # services: # This need to build a place holder image for Cloud Run
-    #   docker:
-    #     image: docker:20.10.8-dind
-    #     options: --privileged
-    #     ports:
-    #       - 2375:2375
-    #     env:
-    #       DOCKER_TLS_CERTDIR: ""
-
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
+
+      - name: Authenticate to Google Cloud
+        run: echo "${{ secrets.GOOGLE_CREDENTIALS }}" | gcloud auth activate-service-account --key-file=-
+        env:
+          GOOGLE_APPLICATION_CREDENTIALS: ${{ secrets.GOOGLE_CREDENTIALS }}
+      
+      - name: Configure Docker for Google Artifact Registry
+        run: gcloud auth configure-docker ${{vars.REGION}}-docker.pkg.dev
+      
 
       - name: Setup terraform variables
         id: vars
@@ -39,6 +39,7 @@ jobs:
           db_name="${{ vars.DB_NAME }}"
           github_app_id="${{vars.TF_GITHUB_APP_ID}}"
           cloud_build_file_path="${{vars.CLOUD_BUILD_FILE_PATH}}"
+          github_repository="${{vars.STARTER_APP_REPOSITORY}}"
           
 
           secrets = {
