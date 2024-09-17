@@ -46,7 +46,7 @@ module "okapi-hub-ci" {
   region                = var.region
   app_name              = "okapi-hub"
   github_app_id         = var.github_app_id
-  github_repository     = "https://github.com/aimensasi/okapi-hub"
+  github_repository     = "https://github.com/aimensasi/okapi-hub.git"
   cloud_build_file_path = ".github/cloudbuild.yaml"
   github_access_token   = google_secret_manager_secret_version.secrets_versions["github_access_token"].name
   service_account = google_service_account.sa.id
