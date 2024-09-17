@@ -18,8 +18,6 @@ resource "google_artifact_registry_repository" "artificate_registery" {
   description   = "Artificate Registery"
   format        = "DOCKER"
   repository_id = var.repository_name
-
-  depends_on = [ google_project_service.artifact_registry ]
 }
 
 resource "docker_image" "nginx" {

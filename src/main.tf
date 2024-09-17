@@ -24,6 +24,8 @@ module "okapi-hub-registry" {
   region = var.region
   app_name = "okapi-hub"
   repository_name = "okapi-hub-repo"
+
+  depends_on = [ google_project_service.artifact_registry ]
 }
 
 module "okapi-hub-ci" {
