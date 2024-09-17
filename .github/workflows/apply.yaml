@@ -1,0 +1,78 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  apply:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        shell: bash
+        working-directory: ./src
+
+    services: # This need to build a place holder image for Cloud Run
+      docker:
+        image: docker:20.10.8
+        options: --privileged
+        ports:
+          - 2375:2375
+        env:
+          DOCKER_TLS_CERTDIR: ""
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Setup terraform variables
+        id: vars
+        run: |-
+          cat > pipeline.auto.tfvars <<EOF
+          env="${{ vars.ENV }}"
+          docker_demon_host="tcp://localhost:2375"
+          region="${{ vars.REGION }}" 
+          project_id="${{ vars.PROJECT_ID }}" 
+          project_id_number="${{ vars.PROJECT_ID_NUMBER }}"
+          db_name="${{ vars.DB_NAME }}"
+          github_app_id=${{vars.TF_GITHUB_APP_ID}}
+          cloud_build_file_path=${{vars.CLOUD_BUILD_FILE_PATH}}
+          
+
+          secrets = {
+            db_username = {
+              secret_id   = "db-username"
+              secret_data = ${{secrets.DB_USERNAME}}
+            }
+            db_password = {
+              secret_id   = "db-password"
+              secret_data = ${{secrets.DB_PASSWORD}}
+            }
+            github_access_token = {
+              secret_id   = "github_access_token"
+              secret_data = ${{secrets.TF_GITHUB_ACCESS_TOKEN}}
+            }
+          }
+          EOF
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v1
+        with:
+          terraform_version: 1.0.0
+
+      - name: Initialize Terraform
+        run: terraform init
+        env:
+          GOOGLE_CREDENTIALS: ${{ secrets.GOOGLE_CREDENTIALS }} 
+
+      - name: Terraform Plan
+        run: terraform plan -input=false
+        env:
+          GOOGLE_CREDENTIALS: ${{ secrets.GOOGLE_CREDENTIALS }} 
+
+      - name: Apply Terraform
+        if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+        run: terraform apply -auto-approve
+        env:
+          GOOGLE_CREDENTIALS: ${{ secrets.GOOGLE_CREDENTIALS }} 

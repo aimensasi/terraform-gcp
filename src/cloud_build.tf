@@ -40,7 +40,7 @@ resource "google_cloudbuild_trigger" "build_trigger" {
     }
   }
 
-  filename = "cloudbuild.yaml"
+  filename = var.cloud_build_file_path
 
   depends_on = [
     google_cloudbuildv2_repository.gcp_starter_repo

@@ -4,39 +4,29 @@ variable "env" {
   default = "dev"
 }
 
-variable "app_name" {
-  description = "The app name"
-  type        = string
-}
-
-variable "image_name" {
-  description = "The image name"
-  type        = string
-}
-
-variable "project_id" {
-  description = "The ID of the GCP project"
-  type        = string
-}
-
-variable "project_id_number" {
-  description = "The number representation of the GCP project"
-  type        = string
-}
-
 variable "region" {
   description = "The region to deploy resources"
   type        = string
   default     = "asia-southeast1"
 }
 
-variable "credentials_file" {
-  description = "Path to the service account credentials file"
+variable "project_id_number" {
+  description = "The number representation of the GCP project"
+  type        = string
+}
+variable "docker_demon_host" {
+  description = "The demon used to run docker"
+  type = string
+  default = "unix:///var/run/docker.sock"
+}
+
+variable "app_name" {
+  description = "The app name"
   type        = string
 }
 
-variable "bucket_name" {
-  description = "Name of storage bucket"
+variable "project_id" {
+  description = "The ID of the GCP project"
   type        = string
 }
 

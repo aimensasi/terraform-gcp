@@ -1,6 +1,6 @@
 # Define the Google Cloud Storage bucket
 resource "google_storage_bucket" "bucket" {
-  name          = "${var.env}-${var.bucket_name}"
+  name          = "${var.env}-${var.app_name}"
   location      = var.region
   storage_class = "STANDARD"
   force_destroy = true
