@@ -18,7 +18,7 @@ resource "google_cloudbuildv2_connection" "github_connection" {
   ]
 }
 
-resource "google_cloudbuildv2_repository" "gcp_starter_repo" {
+resource "google_cloudbuildv2_repository" "github_repository" {
   location          = var.region
   name              = var.app_name
   parent_connection = google_cloudbuildv2_connection.github_connection.name

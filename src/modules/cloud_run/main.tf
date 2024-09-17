@@ -1,12 +1,12 @@
 resource "google_cloud_run_v2_service" "service" {
-  name     = "${var.env}-${var.app_name}-service"
+  name     = "${var.app_name}-service"
   location = var.region
   deletion_protection = false
 
   template {
-    revision = "${var.env}-${var.app_name}-service-revision-${formatdate("YYYYMMDDhhmmss", timestamp())}"
+    revision = "${var.app_name}-service-revision-${formatdate("YYYYMMDDhhmmss", timestamp())}"
     containers {
-      image = "${var.region}-docker.pkg.dev/${var.project_id}/${var.env}-${var.app_name}-app/app:latest"
+      image = var.image
       ports {
         container_port = 80
       }
