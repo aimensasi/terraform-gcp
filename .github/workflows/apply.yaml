@@ -36,22 +36,22 @@ jobs:
           project_id="${{ vars.PROJECT_ID }}" 
           project_id_number="${{ vars.PROJECT_ID_NUMBER }}"
           db_name="${{ vars.DB_NAME }}"
-          github_app_id=${{vars.TF_GITHUB_APP_ID}}
-          cloud_build_file_path=${{vars.CLOUD_BUILD_FILE_PATH}}
+          github_app_id="${{vars.TF_GITHUB_APP_ID}}"
+          cloud_build_file_path="${{vars.CLOUD_BUILD_FILE_PATH}}"
           
 
           secrets = {
             db_username = {
               secret_id   = "db-username"
-              secret_data = ${{secrets.DB_USERNAME}}
+              secret_data = "${{secrets.DB_USERNAME}}"
             }
             db_password = {
               secret_id   = "db-password"
-              secret_data = ${{secrets.DB_PASSWORD}}
+              secret_data = "${{secrets.DB_PASSWORD}}"
             }
             github_access_token = {
               secret_id   = "github_access_token"
-              secret_data = ${{secrets.TF_GITHUB_ACCESS_TOKEN}}
+              secret_data = "${{secrets.TF_GITHUB_ACCESS_TOKEN}}"
             }
           }
           EOF
