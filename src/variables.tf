@@ -14,12 +14,6 @@ variable "project_id_number" {
   type        = string
 }
 
-variable "docker_demon_host" {
-  description = "The demon used to run docker"
-  type = string
-  default = "unix:///var/run/docker.sock"
-}
-
 variable "db_name" {
   description = "Name of database to create"
   type        = string

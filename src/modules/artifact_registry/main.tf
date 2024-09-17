@@ -1,3 +1,17 @@
+terraform {
+  required_providers {
+    docker = {
+      source  = "kreuzwerker/docker"
+      version = "~> 3.0.2"
+    }
+  }
+}
+
+provider "docker" {
+  host = "unix:///var/run/docker.sock"
+}
+
+
 resource "google_artifact_registry_repository" "artificate_registery" {
   project       = var.project_id
   location      = var.region
