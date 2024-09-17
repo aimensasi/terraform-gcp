@@ -7,17 +7,14 @@ terraform {
   }
 }
 
-provider "docker" {
-  host = "unix:///var/run/docker.sock"
-}
-
-
 resource "google_artifact_registry_repository" "artificate_registery" {
   project       = var.project_id
   location      = var.region
   description   = "Artificate Registery"
   format        = "DOCKER"
   repository_id = var.repository_name
+
+  depends_on = [ google_project_service.artifact_registry ]
 }
 
 resource "docker_image" "nginx" {
