@@ -9,13 +9,6 @@ resource "google_cloudbuildv2_connection" "github_connection" {
       oauth_token_secret_version = google_secret_manager_secret_version.secrets_versions["github_access_token"].name
     }
   }
-  depends_on = [
-    google_project_service.cloud_build,
-    google_secret_manager_secret.secrets,
-    google_secret_manager_secret_version.secrets_versions,
-    google_secret_manager_secret_iam_policy.secrets_policies,
-    google_project_service.secret_manager
-  ]
 }
 
 resource "google_cloudbuildv2_repository" "github_repository" {
