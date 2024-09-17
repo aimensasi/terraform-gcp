@@ -15,7 +15,7 @@ jobs:
 
     services: # This need to build a place holder image for Cloud Run
       docker:
-        image: docker:20.10.8
+        image: docker:20.10.8-dind
         options: --privileged
         ports:
           - 2375:2375
