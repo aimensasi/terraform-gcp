@@ -27,7 +27,7 @@ provider "docker" {
 
 
 module "okapi-hub-registry" {
-  source = "./modules/artifact_registry/main.tf"
+  source = "./modules/artifact_registry"
 
   project_id = var.project_id
   region = var.region
@@ -36,7 +36,7 @@ module "okapi-hub-registry" {
 }
 
 module "okapi-hub-ci" {
-  source = "./modules/cloud_build/main.tf"
+  source = "./modules/cloud_build"
 
   project_id = var.project_id
   region = var.region
@@ -47,7 +47,7 @@ module "okapi-hub-ci" {
 }
 
 module "okapi-hub-service" {
-  source = "./modules/cloud_run/main.tf"
+  source = "./modules/cloud_run"
 
   region = var.region
   app_name = "okapi-hub"
