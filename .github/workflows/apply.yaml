@@ -29,7 +29,6 @@ jobs:
         id: vars
         run: |-
           cat > pipeline.auto.tfvars <<EOF
-          app_name="${{ vars.APP_NAME }}"
           region="${{ vars.REGION }}" 
           project_id="${{ vars.PROJECT_ID }}" 
           project_id_number="${{ vars.PROJECT_ID_NUMBER }}"
