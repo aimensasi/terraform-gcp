@@ -13,14 +13,14 @@ jobs:
         shell: bash
         working-directory: ./src
 
-    services: # This need to build a place holder image for Cloud Run
-      docker:
-        image: docker:20.10.8-dind
-        options: --privileged
-        ports:
-          - 2375:2375
-        env:
-          DOCKER_TLS_CERTDIR: ""
+    # services: # This need to build a place holder image for Cloud Run
+    #   docker:
+    #     image: docker:20.10.8-dind
+    #     options: --privileged
+    #     ports:
+    #       - 2375:2375
+    #     env:
+    #       DOCKER_TLS_CERTDIR: ""
 
     steps:
       - name: Checkout repository
@@ -32,7 +32,7 @@ jobs:
           cat > pipeline.auto.tfvars <<EOF
           app_name="${{ vars.APP_NAME }}"
           env="${{ vars.ENV }}"
-          docker_demon_host="tcp://docker:2375"
+          docker_demon_host="unix:///var/run/docker.sock"
           region="${{ vars.REGION }}" 
           project_id="${{ vars.PROJECT_ID }}" 
           project_id_number="${{ vars.PROJECT_ID_NUMBER }}"
