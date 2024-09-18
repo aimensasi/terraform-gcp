@@ -63,7 +63,7 @@ jobs:
           GOOGLE_CREDENTIALS: ${{ secrets.GOOGLE_CREDENTIALS }} 
 
       - name: Remove Lock
-        run: terraform force-unlock 1726626332541495 --force
+        run: terraform --force force-unlock 1726626332541495
         env:
           GOOGLE_CREDENTIALS: ${{ secrets.GOOGLE_CREDENTIALS }}
 
