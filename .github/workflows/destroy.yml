@@ -6,11 +6,16 @@ on:
 jobs:
   destroy:
     runs-on: ubuntu-latest
+
+    permissions:
+      contents: write  # Required for repository access
+      actions: write
+
     steps:
       - name: Wait for approval
         uses: hmarr/auto-approve-action@v2.0.0
         with:
-          github-token: ${{ secrets.TF_GITHUB_ACCESS_TOKEN }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
           
       - name: Checkout code
         uses: actions/checkout@v2
