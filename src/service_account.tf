@@ -7,7 +7,7 @@ resource "google_service_account" "sa" {
 
 resource "google_project_iam_binding" "sa_cloudbuild" {
   project = var.project_id
-  role    = "roles/cloudbuild.builds.builder"
+  role    = "roles/cloudbuild.editor"
 
   members = [
     "serviceAccount:${google_service_account.sa.email}",
