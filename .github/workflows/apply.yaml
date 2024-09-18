@@ -75,7 +75,7 @@ jobs:
 
   notify_destroy:
     runs-on: ubuntu-latest
-    if: success()  # Only if the previous apply step succeeded
+    needs: apply
     steps:
       - name: Trigger Destroy Workflow
         uses: actions/github-script@v3
