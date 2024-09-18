@@ -80,6 +80,7 @@ jobs:
       - name: Trigger Destroy Workflow
         uses: actions/github-script@v3
         with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
             const { owner, repo } = context.repo;
             github.actions.createWorkflowDispatch({
