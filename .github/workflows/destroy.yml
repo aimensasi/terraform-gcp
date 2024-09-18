@@ -10,7 +10,7 @@ jobs:
       - name: Wait for approval
         uses: hmarr/auto-approve-action@v2.0.0
         with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
+          github-token: ${{ secrets.TF_GITHUB_ACCESS_TOKEN }}
           
       - name: Checkout code
         uses: actions/checkout@v2
