@@ -22,7 +22,7 @@ resource "google_cloudbuildv2_repository" "github_repository" {
 
 resource "google_cloudbuild_trigger" "build_trigger" {
   name = "gcp-starter-build-trigger"
-  service_account = var.service_account
+  service_account = "service-${var.project_id_number}@gcp-sa-cloudbuild.iam.gserviceaccount.com"
   location = var.region
 
   repository_event_config {

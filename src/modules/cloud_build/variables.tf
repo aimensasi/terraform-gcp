@@ -3,6 +3,11 @@ variable "project_id" {
   type        = string
 }
 
+variable "project_id_number" {
+  description = "Project ID number"
+  type = string
+}
+
 variable "region" {
   description = "The region to deploy resources"
   type        = string

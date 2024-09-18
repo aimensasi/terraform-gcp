@@ -43,6 +43,7 @@ module "okapi-hub-ci" {
   source = "./modules/cloud_build"
 
   project_id            = var.project_id
+  project_id_number     = var.project_id_number
   region                = var.region
   app_name              = "okapi-hub"
   github_app_id         = var.github_app_id
