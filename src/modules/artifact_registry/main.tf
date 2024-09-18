@@ -15,6 +15,7 @@ resource "google_artifact_registry_repository" "artificate_registery" {
   repository_id = var.repository_name
 }
 
+# Only run once when creating the artifact registry
 resource "docker_image" "nginx" {
   name = "nginx:latest"
   platform = "linux/amd64"
