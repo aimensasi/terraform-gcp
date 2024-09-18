@@ -7,7 +7,18 @@ resource "google_service_account" "sa" {
 
 resource "google_project_iam_binding" "sa_cloudbuild" {
   project = var.project_id
-  role    = "roles/cloudbuild.editor"
+  role    = "roles/cloudbuild.builds.builder"
+
+  members = [
+    "serviceAccount:${google_service_account.sa.email}",
+  ]
+
+  depends_on = [google_service_account.sa]
+}
+
+resource "google_project_iam_binding" "sa_cloudbuild_agent" {
+  project = var.project_id
+  role    = "roles/cloudbuild.serviceAgent"
 
   members = [
     "serviceAccount:${google_service_account.sa.email}",
