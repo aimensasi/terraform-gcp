@@ -72,3 +72,19 @@ jobs:
         run: terraform apply -auto-approve
         env:
           GOOGLE_CREDENTIALS: ${{ secrets.GOOGLE_CREDENTIALS }} 
+
+  notify_destroy:
+    runs-on: ubuntu-latest
+    if: success()  # Only if the previous apply step succeeded
+    steps:
+      - name: Trigger Destroy Workflow
+        uses: actions/github-script@v3
+        with:
+          script: |
+            const { owner, repo } = context.repo;
+            github.actions.createWorkflowDispatch({
+              owner,
+              repo,
+              workflow_id: 'destroy.yml',
+              ref: 'main'
+            });

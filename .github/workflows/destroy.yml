@@ -1,0 +1,24 @@
+name: Manual Terraform Destroy
+
+on:
+  workflow_dispatch:  # This will allow manual trigger
+
+jobs:
+  destroy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Wait for approval
+        uses: hmarr/auto-approve-action@v2.0.0
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v1
+        with:
+          terraform_version: 1.0.0
+
+      - name: Terraform Destroy
+        run: terraform destroy -auto-approve
